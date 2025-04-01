@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Details Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl grid grid-cols-2 gap-4">
+        <form class="bg-white p-6 rounded-lg shadow-lg" action="/predict" method="POST">
+            <h2 class="text-2xl font-bold mb-6 text-center">Client Details Form</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block mb-2">Age</label>
+                    <input type="number" name="age"  class="w-full p-2 border rounded" placeholder="Enter Age" required>
+                </div>
+                <div>
+                    <label class="block mb-2">Job</label>
+                    <select name="job" class="w-full p-2 border rounded">
+                        <option selected disabled>Select...</option>
+                        <option value="0">admin</option>
+                        <option value="1">blue-collar</option>
+                        <option value="2">entrepreneur</option>
+                        <option value="3">housemaid</option>
+                        <option value="4">management</option>
+                        <option value="5">retired</option>
+                        <option value="6">self-employed</option>
+                        <option value="7">services</option>
+                        <option value="8">student</option>
+                        <option value="9">technician</option>
+                        <option value="10">unemployed</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block mb-2">Marital Status</label>
+                    <select name="marital" class="w-full p-2 border rounded">
+                        <option selected disabled>Select...</option>
+                        <option value="0">married</option>
+                        <option value="1">single</option>
+                        <option value="2">divorced</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block mb-2">Education</label>
+                    <select name="education" class="w-full p-2 border rounded">
+                        <option selected disabled>Select...</option>
+                        <option value="0">primary</option>
+                        <option value="1">secondary</option>
+                        <option value="2">tertiary</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block mb-2">Default</label>
+                    <input type="text" name="default" class="w-full p-2 border rounded" placeholder="Enter Default">
+                </div>
+                <div>
+                    <label class="block mb-2">Housing Loan</label>
+                    <select name="housing" class="w-full p-2 border rounded">
+                        <option selected disabled>Select...</option>
+                        <option value="0">yes</option>
+                        <option value="1">no</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block mb-2">Loan</label>
+                    <select name="loan" class="w-full p-2 border rounded">
+                        <option selected disabled>Select...</option>
+                        <option value="0">yes</option>
+                        <option value="1">no</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block mb-2">Duration</label>
+                    <input type="number" name="duration" class="w-full p-2 border rounded" placeholder="Enter Duration" required>
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded mt-4">Get Answer</button>
+        </form>
+        <p class="text-lg font-semibold">Predict: {{ pred }}</p>
+    </div>
+
+    <div class="bg-gray-200 p-6 rounded-lg shadow-md">
+        
+    </div>
+</body>
+</html>

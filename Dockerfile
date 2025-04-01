@@ -7,5 +7,6 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-ENTRYPOINT python main.py
+# Set the entrypoint correctly
+ENTRYPOINT ["python", "jinja/main.py"]
 #CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]

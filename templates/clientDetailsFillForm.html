@@ -13,11 +13,11 @@
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block mb-2">Age</label>
-                    <input type="number" name="age"  class="w-full p-2 border rounded" placeholder="Enter Age" required>
+                    <input type="number" id="age"  class="w-full p-2 border rounded" placeholder="Enter Age" required>
                 </div>
                 <div>
                     <label class="block mb-2">Job</label>
-                    <select name="job" class="w-full p-2 border rounded">
+                    <select id="job" class="w-full p-2 border rounded">
                         <option selected disabled>Select...</option>
                         <option value="0">admin</option>
                         <option value="1">blue-collar</option>
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     <label class="block mb-2">Marital Status</label>
-                    <select name="marital" class="w-full p-2 border rounded">
+                    <select id="marital" class="w-full p-2 border rounded">
                         <option selected disabled>Select...</option>
                         <option value="0">married</option>
                         <option value="1">single</option>
@@ -43,7 +43,7 @@
                 </div>
                 <div>
                     <label class="block mb-2">Education</label>
-                    <select name="education" class="w-full p-2 border rounded">
+                    <select id="education" class="w-full p-2 border rounded">
                         <option selected disabled>Select...</option>
                         <option value="0">primary</option>
                         <option value="1">secondary</option>
@@ -52,11 +52,11 @@
                 </div>
                 <div>
                     <label class="block mb-2">Default</label>
-                    <input type="text" name="default" class="w-full p-2 border rounded" placeholder="Enter Default">
+                    <input type="text" id="default" class="w-full p-2 border rounded" placeholder="Enter Default">
                 </div>
                 <div>
                     <label class="block mb-2">Housing Loan</label>
-                    <select name="housing" class="w-full p-2 border rounded">
+                    <select id="housing" class="w-full p-2 border rounded">
                         <option selected disabled>Select...</option>
                         <option value="0">yes</option>
                         <option value="1">no</option>
@@ -64,7 +64,7 @@
                 </div>
                 <div>
                     <label class="block mb-2">Loan</label>
-                    <select name="loan" class="w-full p-2 border rounded">
+                    <select id="loan" class="w-full p-2 border rounded">
                         <option selected disabled>Select...</option>
                         <option value="0">yes</option>
                         <option value="1">no</option>
@@ -72,16 +72,44 @@
                 </div>
                 <div>
                     <label class="block mb-2">Duration</label>
-                    <input type="number" name="duration" class="w-full p-2 border rounded" placeholder="Enter Duration" required>
+                    <input type="number" id="duration" class="w-full p-2 border rounded" placeholder="Enter Duration" required>
                 </div>
             </div>
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded mt-4">Get Answer</button>
+            <button type="button" id='getPredictBtn' class="w-full bg-blue-500 text-white py-2 rounded mt-4">Get Answer</button>
         </form>
-        <p class="text-lg font-semibold">Predict: {{ pred }}</p>
+        <p id="predictionResult" class="text-lg font-semibold">Predict: </p>
     </div>
 
-    <div class="bg-gray-200 p-6 rounded-lg shadow-md">
+
+    <script>
+        document.getElementById("getPredictBtn").addEventListener("click", function() {
+            const formData = new FormData();
         
-    </div>
+            // Append text fields
+            formData.append("age", document.getElementById("age").value);
+            formData.append("job", document.getElementById("job").value);
+            formData.append("marital", document.getElementById("marital").value);
+            formData.append("education", document.getElementById("education").value);
+            formData.append("default", document.getElementById("default").value);
+            formData.append("housing", document.getElementById("housing").value);
+            formData.append("loan", document.getElementById("loan").value);
+            formData.append("duration", document.getElementById("duration").value);
+        
+            fetch('/predict', {
+                method: 'POST',
+                body: formData // 🚀 DO NOT set Content-Type, the browser will handle it!
+            })
+            .then(response => response.json()) // If JSON response expected
+            .then(data => {
+                 // Update the prediction text dynamically
+                  document.getElementById("predictionResult").textContent = "Predict: " + data.prediction;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error submitting the form.");
+            });
+        });        
+    </script>
+
 </body>
 </html>

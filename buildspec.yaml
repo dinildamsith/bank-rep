@@ -1,17 +1,20 @@
 version: 0.2
-
 phases:
   pre_build:
     commands:
-      - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 850995549173.dkr.ecr.eu-north-1.amazonaws.com
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 850995549173.dkr.ecr.us-east-1.amazonaws.com
   build:
     commands:
-      - docker build -t bank-rep .
-      - docker tag bank-rep:latest 850995549173.dkr.ecr.eu-north-1.amazonaws.com/bank-rep:latest
+      - echo Building Docker image...
+      - docker build -t my-app .
+      - docker tag my-app:latest 850995549173.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
   post_build:
     commands:
-      - docker push 850995549173.dkr.ecr.eu-north-1.amazonaws.com/bank-rep:latest
-      - echo Writing image definitions file...
-      - printf '[{"name":"bank","imageUri":"%s"}]' 505076619770.dkr.ecr.ap-south-1.amazonaws.com/ai:latest > imagedefinitions.json   
+      - echo Pushing Docker image...
+      - docker push 850995549173.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
+      - echo Writing image definition file...
+      - printf '[{"name":"my-app","imageUri":"850995549173.dkr.ecr.us-east-1.amazonaws.com/my-app:latest"}]' > imagedefinitions.json
 artifacts:
-  files: imagedefinitions.json
+  files:
+    - imagedefinitions.json

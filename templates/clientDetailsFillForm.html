@@ -7,13 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl grid grid-cols-2 gap-4">
-        <form class="bg-white p-6 rounded-lg shadow-lg" action="/predict" method="POST">
+
+
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl flex flex-col md:grid md:grid-cols-2 gap-4">
+        <form class="bg-white p-6 rounded-lg shadow-lg w-full" action="/predict" method="POST">
             <h2 class="text-2xl font-bold mb-6 text-center">Client Details Form</h2>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block mb-2">Age</label>
-                    <input type="number" id="age"  class="w-full p-2 border rounded" placeholder="Enter Age" required>
+                    <input type="number" id="age" class="w-full p-2 border rounded" placeholder="Enter Age" required>
                 </div>
                 <div>
                     <label class="block mb-2">Job</label>
@@ -52,7 +54,11 @@
                 </div>
                 <div>
                     <label class="block mb-2">Default</label>
-                    <input type="text" id="default" class="w-full p-2 border rounded" placeholder="Enter Default">
+                    <select id="default" class="w-full p-2 border rounded">
+                        <option selected disabled>Select...</option>
+                        <option value="0">yes</option>
+                        <option value="1">no</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block mb-2">Housing Loan</label>
@@ -75,12 +81,15 @@
                     <input type="number" id="duration" class="w-full p-2 border rounded" placeholder="Enter Duration" required>
                 </div>
             </div>
-            <button type="button" id='getPredictBtn' class="w-full bg-blue-500 text-white py-2 rounded mt-4">Get Answer</button>
+            <button type="button" id="getPredictBtn" class="w-full bg-blue-500 text-white py-2 rounded mt-4">Get Answer</button>
         </form>
-        <p id="predictionResult" class="text-lg font-semibold">Predict Result: </p>
+    
+        <!-- Prediction Result (Will be displayed below the form on mobile) -->
+        <p id="predictionResult" class="text-lg font-semibold order-2 md:order-none text-center mt-4 md:mt-0">
+            Predict Result:
+        </p>
     </div>
-
-
+    
 
     
 

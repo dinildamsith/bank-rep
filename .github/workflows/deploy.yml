@@ -3,7 +3,7 @@ name: Deploy Flask App to AWS EC2
 on:
   push:
     branches:
-      - REALASE
+      - RELEASE   # Fix the typo in the branch name
 
 jobs:
   deploy:
@@ -12,6 +12,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
